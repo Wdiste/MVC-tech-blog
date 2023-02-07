@@ -10,12 +10,12 @@
     <p>
       {{content}}
     </p>
-        {{!-- <ul>
-        {{#each comment as |c| }}
-        <li>{{comment.content}}</li>
-        <p>Created by {{c.user.name}} on {{format_date c.date_created}}</p>
+        <ul>
+        {{#each this.comments as |c| }}
+        <li>{{c.content}}</li>
+        <p>Created by {{commenter.name}} on {{format_date c.date_created}}</p>
         {{/each}}
-      </ul> --}}
+      </ul>
   </div>
 </div>
 {{/each}}

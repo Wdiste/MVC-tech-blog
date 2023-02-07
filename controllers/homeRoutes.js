@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
+const Sequelize = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
@@ -12,13 +13,20 @@ router.get('/', async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ['content']
+          attributes: ['content', 'date_created', 'user_id'],
+          include: [
+            {
+              model: User,
+              as: 'commenter',
+              attributes: ['name'],
+            }
+          ]
         }
       ],
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    console.log('posts:', posts.map((post) => post.Comments))
+    console.log('comments:', posts[0].comments)
 
     res.render('homepage', { 
       posts, 
