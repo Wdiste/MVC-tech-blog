@@ -16,19 +16,9 @@ router.get('/', async (req, res) => {
         }
       ],
     });
-    // console.log('postData:', postData)
-    // const commentData = await Comment.findAll({
-    //   include: [
-    //     {
-    //       model: User,
-    //       attributes: ['name'],
-    //     },
-    //   ],
-    // });
-    // const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    // console.log('posts:', posts)
+    console.log('posts:', posts.map((post) => post.Comments))
 
     res.render('homepage', { 
       posts, 
