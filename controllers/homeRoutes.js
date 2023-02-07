@@ -26,7 +26,6 @@ router.get('/', async (req, res) => {
     });
 
     const posts = postData.map((post) => post.get({ plain: true }));
-    console.log('comments:', posts[0].comments)
 
     res.render('homepage', { 
       posts, 
@@ -46,26 +45,24 @@ router.get('/post/:id', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment,
+          attributes: ['content', 'date_created', 'user_id'],
+          include: [
+            {
+              model: User,
+              as: 'commenter',
+              attributes: ['name'],
+            }
+          ]
+        }
       ],
     });
 
     const posts = postData.get({ plain: true });
-
-    const commentData = await Comment.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-          attributes: ['name'],
-        },
-      ],
-    });
-
-    const comments = commentData.get({ plain: true });
-
-    console.log('rendering homepage')
-    res.render('homepage', {
+    console.log('posts: ', posts)
+    res.render('post', {
       ...posts,
-      ...comments,
       logged_in: req.session.logged_in
     });
   } catch (err) {
