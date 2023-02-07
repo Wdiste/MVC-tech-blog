@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-const Sequelize = require('sequelize');
+// removed Sequelize
 
 router.get('/', async (req, res) => {
   try {
@@ -60,10 +60,10 @@ router.get('/post/:id', async (req, res) => {
     });
 
     const posts = postData.get({ plain: true });
-    console.log('posts: ', posts)
+
     res.render('post', {
       ...posts,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     console.log(err)
