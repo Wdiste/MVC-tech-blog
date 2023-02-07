@@ -10,23 +10,39 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['name'],
         },
+        {
+          model: Comment,
+          attributes: ['content']
+        }
       ],
     });
+    // console.log('postData:', postData)
+    // const commentData = await Comment.findAll({
+    //   include: [
+    //     {
+    //       model: User,
+    //       attributes: ['name'],
+    //     },
+    //   ],
+    // });
+    // const comments = commentData.map((comment) => comment.get({ plain: true }));
 
     const posts = postData.map((post) => post.get({ plain: true }));
+    // console.log('posts:', posts)
 
     res.render('homepage', { 
       posts, 
       logged_in: req.session.logged_in 
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
 router.get('/post/:id', async (req, res) => {
   try {
-    const postData = await post.findByPk(req.params.id, {
+    const postData = await Post.findByPk(req.params.id, {
       include: [
         {
           model: User,
@@ -48,12 +64,14 @@ router.get('/post/:id', async (req, res) => {
 
     const comments = commentData.get({ plain: true });
 
-    res.render('post', {
+    console.log('rendering homepage')
+    res.render('homepage', {
       ...posts,
       ...comments,
       logged_in: req.session.logged_in
     });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });

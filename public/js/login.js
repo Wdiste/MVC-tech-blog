@@ -11,16 +11,14 @@ const loginFormHandler = async (event) => {
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
-    });
-
+    }).then( response => {
     if (response.ok) {
       // If successful, redirect the browser to the profile page
-      document.location.replace('/profile');
+      document.location.replace('/dashboard');
     } else {
       alert(response.statusText);
-    }
-  }
-};
+    }})
+  }};
 
 const signupFormHandler = async (event) => {
   event.preventDefault();
