@@ -32,12 +32,10 @@
             {{#if c.delete_access}}
             <button class="btn btn-sm btn-danger comment-delete" data-curr-user="{{this.current_user}}" data-creator="{{comment.user_id}}" data-id="{{c.id}}">Delete Comment</button>
             <button class="btn btn-sm btn-warning comment-render">Update Comment</button>
-                <form class="form comment-update-form invisible">
+                <form class="form comment-update-form d-none">
                     <div class="form-group">
                       <label for="comment-content">content:</label>
                       <textarea class="form-input" id="comment-update-content" name="comment-content"></textarea>
-                    </div>
-                    <div class="form-group">
                       <button type="submit" class="btn btn-warning comment-update" data-id="{{id}}">Update</button>
                     </div>
                   </form>

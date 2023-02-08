@@ -4,7 +4,7 @@ const post_id = document.querySelector('#post-id').innerHTML;
 const commentNewRender = async (event) => {
     document
       .querySelector('.new-comment-render')
-      .classList.toggle("invisible");
+      .classList.toggle("d-none");
     document
       .querySelector('.new-comment-form')
       .classList.remove("invisible");
@@ -96,23 +96,22 @@ const delButtonHandler = async (event) => {
   
   // button to reveal the form for updating a comment
 const commentUpdateRender = async (event) => {
-    document
-      .querySelector('.comment-render')
-      .classList.toggle("invisible");
-    document
-      .querySelector('.comment-update-form')
-      .classList.remove("invisible");
-  };
+    event.currentTarget.classList.add("d-none");
+    
+    // for future ref: nextSibling twice on our target buttons matches 
+    // the form element immediately after the button we clicked
+    event.target.nextSibling.nextSibling.classList.toggle('d-none');
+    };
 
   // updates a comment based on update comment form
 const updateCommentHandler = async (event) => {
     event.preventDefault();
 
-    const content = document.querySelector('#comment-update-content').value.trim();  
+    const content = event.currentTarget.nextSibling.parentElement.querySelector('.form-input').value.trim();  
   if (event.target.hasAttribute('data-id')) {
     const user_id = event.target.getAttribute('data-id');
+    console.log('target text form', event.currentTarget.nextSibling.parentElement.querySelector('.form-input').value);
   
-    console.log('inside theupdateCommentHandler ', "content ", content, "user_id ", user_id, "post_id ", post_id)
   try{
     if (content) {
       const response = await fetch(`/api/comment/${user_id}`, {
@@ -157,16 +156,19 @@ document
 
     // if the render button exists (user owns the comment), look for button to show update comment form
 if(document.querySelector('.comment-render')){
-document
-    .querySelector('.comment-render')
-    .addEventListener('click', commentUpdateRender);
+  const updateRenderBtn = document.querySelectorAll('.comment-render');
+  const updateRenderForm = document.querySelectorAll('.comment-update-form')
+  
+  for(i = 0; i < updateRenderBtn.length; i++)
+  updateRenderBtn[i].addEventListener('click', commentUpdateRender, updateRenderForm[i]);
 }
 
     // if the update button exists (user owns the comment), look for button to  update comment
 if(document.querySelector('.comment-update')){
-document
-    .querySelector('.comment-update')
-    .addEventListener('click', updateCommentHandler);
+  const updateBtn = document.querySelectorAll('.comment-update')
+  
+  for(i = 0; i < updateBtn.length; i++)
+  updateBtn[i].addEventListener('click', updateCommentHandler);
 }
 
     // if the delete button exists (user owns the comment), look for button to delete comment
