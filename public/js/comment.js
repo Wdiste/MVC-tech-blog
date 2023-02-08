@@ -1,5 +1,14 @@
 const post_id = document.querySelector('#post-id').innerHTML;
 
+const commentNewRender = async (event) => {
+    document
+      .querySelector('.new-comment-btn')
+      .classList.toggle("invisible");
+    document
+      .querySelector('.new-comment-form')
+      .classList.remove("invisible");
+  };
+
 const newCommentHandler = async (event) => {
     event.preventDefault();
   
