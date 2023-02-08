@@ -170,9 +170,9 @@ document
 }
 
     // if the delete button exists (user owns the comment), look for button to delete comment
-
 if(document.querySelector('.comment-delete')){
-  document
-    .querySelector('.comment-delete')
-    .addEventListener('click', delButtonHandler);
-}
+  let deleteBtn = document.querySelectorAll('.comment-delete');
+
+  for(i = 0; i < deleteBtn.length; i++)
+      deleteBtn[i].addEventListener('click', delButtonHandler);
+};
