@@ -107,6 +107,7 @@ const commentUpdateRender = async (event) => {
 const updateCommentHandler = async (event) => {
     event.preventDefault();
 
+    // this ridiculous DOM path leeds to our pot of gold (update textarea content)
     const content = event.currentTarget.nextSibling.parentElement.querySelector('.form-input').value.trim();  
   if (event.target.hasAttribute('data-id')) {
     const user_id = event.target.getAttribute('data-id');
