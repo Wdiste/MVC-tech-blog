@@ -17,6 +17,23 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+
+router.put('/:id', withAuth, async (req, res) => {
+  console.log('req Body: ', req.body)
+  try {
+    const updatedComment = await Comment.update({
+      ...req.body,
+      user_id: req.session.user_id,
+    }, { where: { id: req.params.id } });
+
+    res.status(200).json(updatedComment);
+  } catch (err) {
+    console.log(err)
+    res.status(400).json(err);
+  }
+});
+
+
 router.delete('/:id', withAuth, async (req, res) => {
     try {
       const targetComment = await Comment.findByPk(req.params.id);

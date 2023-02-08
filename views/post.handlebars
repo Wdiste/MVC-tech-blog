@@ -28,9 +28,18 @@
         <p>Created by {{commenter.name}} on {{format_date c.date_created}}</p>
         {{#if c.delete_access}}
         <button class="btn btn-sm btn-danger comment-delete" data-curr-user="{{this.current_user}}" data-creator="{{comment.user_id}}" data-id="{{c.id}}">Delete Comment</button>
+        <button class="btn btn-sm btn-warning comment-render">Update Comment</button>
+            <form class="form new-comment-form comment-update-form invisible">
+                <div class="form-group">
+                  <label for="comment-content">content:</label>
+                  <textarea class="form-input" id="comment-update-content" name="comment-content"></textarea>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary comment-update" data-id="{{id}}">Update</button>
+                </div>
+              </form>
         {{/if}}
       {{/each}}
-
     </ul>
     <form class="form new-comment-form">
       <div class="form-group">

@@ -25,7 +25,7 @@ const newCommentHandler = async (event) => {
     }
   };
 
-const updateRender = async (event) => {
+const postUpdateRender = async (event) => {
     document
       .querySelector('.post-render')
       .classList.toggle("invisible");
@@ -34,7 +34,7 @@ const updateRender = async (event) => {
       .classList.remove("invisible");
   };
 
-  const updatePostHandler = async (event) => {
+const updatePostHandler = async (event) => {
     event.preventDefault();
 
     const title = document.querySelector('#post-name').value.trim();
@@ -80,20 +80,65 @@ const delButtonHandler = async (event) => {
     };
   };
   
+const commentUpdateRender = async (event) => {
+    document
+      .querySelector('.comment-render')
+      .classList.toggle("invisible");
+    document
+      .querySelector('.comment-update-form')
+      .classList.remove("invisible");
+  };
+
+const updateCommentHandler = async (event) => {
+    event.preventDefault();
+
+    const content = document.querySelector('#comment-update-content').value.trim();  
+  if (event.target.hasAttribute('data-id')) {
+    const user_id = event.target.getAttribute('data-id');
+  
+    console.log('inside theupdateCommentHandler ', "content ", content, "user_id ", user_id, "post_id ", post_id)
+  try{
+    if (content) {
+      const response = await fetch(`/api/comment/${user_id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ content, post_id, user_id }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        
+        alert('Failed to update post');
+      }}
+    }
+    catch (err) {console.log(err)};
+  };};
+
 document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newCommentHandler);
 
 document
     .querySelector('.post-render')
-    .addEventListener('click', updateRender);
+    .addEventListener('click', postUpdateRender);
   
 document
     .querySelector('.post-update')
     .addEventListener('click', updatePostHandler);
 
+document
+    .querySelector('.comment-render')
+    .addEventListener('click', commentUpdateRender);
+
+document
+    .querySelector('.comment-update')
+    .addEventListener('click', updateCommentHandler);
+
 if(document.querySelector('.comment-delete')){
   document
-    .querySelector('.comment-list')
+    .querySelector('.comment-delete')
     .addEventListener('click', delButtonHandler);
 }
