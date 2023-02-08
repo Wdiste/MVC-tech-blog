@@ -24,6 +24,44 @@ const newCommentHandler = async (event) => {
       }
     }
   };
+
+const updateRender = async (event) => {
+    document
+      .querySelector('.post-render')
+      .classList.toggle("invisible");
+    document
+      .querySelector('.post-update-form')
+      .classList.remove("invisible");
+  };
+
+  const updatePostHandler = async (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#post-name').value.trim();
+    const content = document.querySelector('#post-content').value.trim();
+  
+  if (event.target.hasAttribute('data-id')) {
+    const id = event.target.getAttribute('data-id');
+  
+  try{
+    if (title && content) {
+      const response = await fetch(`/api/posts/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ title, content, id }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        document.location.reload();
+      } else {
+        
+        alert('Failed to update post');
+      }}
+    }
+    catch (err) {console.log(err)};
+  };};
   
 const delButtonHandler = async (event) => {
 
@@ -45,7 +83,15 @@ const delButtonHandler = async (event) => {
 document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newCommentHandler);
+
+document
+    .querySelector('.post-render')
+    .addEventListener('click', updateRender);
   
+document
+    .querySelector('.post-update')
+    .addEventListener('click', updatePostHandler);
+
 if(document.querySelector('.comment-delete')){
   document
     .querySelector('.comment-list')
