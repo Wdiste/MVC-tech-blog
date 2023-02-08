@@ -146,10 +146,11 @@ document
     .addEventListener('submit', newCommentHandler);
 
     // show update post form
+if(document.querySelector('.post-render')){
 document
     .querySelector('.post-render')
     .addEventListener('click', postUpdateRender);
-  
+}  
     // update this post
 document
     .querySelector('.post-update')

@@ -3,7 +3,9 @@
     <h2>{{title}}</h2>
     <p>Created by {{user.name}} on {{format_date date_created}}</p>
     <p>post no. <span id="post-id">{{id}}</span></p>
+    {{#if c.delete_access}}
     <button class="btn btn-sm btn-warning post-render" >Edit</button>
+    {{/if}}
     <form class="form post-update-form invisible">
       <div class="form-group">
         <label for="post-name">post name:</label>
