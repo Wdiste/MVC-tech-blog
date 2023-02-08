@@ -2,7 +2,7 @@ const post_id = document.querySelector('#post-id').innerHTML;
 
 const commentNewRender = async (event) => {
     document
-      .querySelector('.new-comment-btn')
+      .querySelector('.new-comment-render')
       .classList.toggle("invisible");
     document
       .querySelector('.new-comment-form')
@@ -13,7 +13,7 @@ const newCommentHandler = async (event) => {
     event.preventDefault();
   
     const newComment = {
-        content: document.querySelector('#comment-content').value.trim(),
+        content: document.querySelector('#new-comment-content').value.trim(),
         post_id: post_id,
     };
     
@@ -127,6 +127,10 @@ const updateCommentHandler = async (event) => {
   };};
 
 document
+  .querySelector('.new-comment-render')
+  .addEventListener('click', commentNewRender);
+
+document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newCommentHandler);
 
@@ -138,13 +142,17 @@ document
     .querySelector('.post-update')
     .addEventListener('click', updatePostHandler);
 
+if(document.querySelector('.comment-delete')){
 document
     .querySelector('.comment-render')
     .addEventListener('click', commentUpdateRender);
+}
 
+if(document.querySelector('.comment-update')){
 document
     .querySelector('.comment-update')
     .addEventListener('click', updateCommentHandler);
+}
 
 if(document.querySelector('.comment-delete')){
   document

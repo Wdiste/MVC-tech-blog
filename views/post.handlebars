@@ -4,7 +4,7 @@
     <p>Created by {{user.name}} on {{format_date date_created}}</p>
     <p>post no. <span id="post-id">{{id}}</span></p>
     <button class="btn btn-sm btn-warning post-render" >Edit</button>
-    <form class="form new-post-form post-update-form invisible">
+    <form class="form post-update-form invisible">
       <div class="form-group">
         <label for="post-name">post name:</label>
         <input class="form-input" type="text" id="post-name" name="post-name" />
@@ -32,7 +32,7 @@
             {{#if c.delete_access}}
             <button class="btn btn-sm btn-danger comment-delete" data-curr-user="{{this.current_user}}" data-creator="{{comment.user_id}}" data-id="{{c.id}}">Delete Comment</button>
             <button class="btn btn-sm btn-warning comment-render">Update Comment</button>
-                <form class="form new-comment-form comment-update-form invisible">
+                <form class="form comment-update-form invisible">
                     <div class="form-group">
                       <label for="comment-content">content:</label>
                       <textarea class="form-input" id="comment-update-content" name="comment-content"></textarea>
@@ -46,20 +46,19 @@
         </div>
       {{/each}}
     </ul>
-      <button class="btn btn-sm btn-primary new-comment-btn">Create comment</button>
+      <button class="btn btn-sm btn-primary new-comment-render">Create comment</button>
       <form class="form new-comment-form invisible">
         <div class="form-group">
-          <label for="comment-content">Add comment:</label>
+          <label for="new-comment-content">Add comment:</label>
           <textarea
             class="form-input"
-            id="comment-content"
-            name="comment-content"
+            id="new-comment-content"
+            name="new-comment-content"
           ></textarea>
           <button type="submit" class="btn btn-primary">Add comment</button>
         </div>
       </form>
     </div>
-  </div>
 </div>
 
 <script src="/js/comment.js" type="text/javascript"></script>
