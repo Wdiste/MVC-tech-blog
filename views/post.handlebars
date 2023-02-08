@@ -10,10 +10,15 @@
     </p>
     <ul class="comment-list">
       {{#each this.comments as |c|}}
+      {{!-- {{#each this.is_user as |current_user|}} --}}
         <li>{{c.content}}</li>
         <p>Created by {{commenter.name}} on {{format_date c.date_created}}</p>
-        <button class="btn btn-sm btn-danger visible" data-id="{{c.id}}">Delete Comment</button>
+        {{#if c.delete_access}}
+        <button class="btn btn-sm btn-danger comment-delete visible" data-curr-user="{{this.current_user}}" data-creator="{{comment.user_id}}" data-id="{{c.id}}">Delete Comment</button>
+        {{/if}}
+      {{!-- {{/each}} --}}
       {{/each}}
+
     </ul>
     <form class="form new-comment-form">
       <div class="form-group">

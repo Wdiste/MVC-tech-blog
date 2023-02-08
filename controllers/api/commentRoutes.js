@@ -19,10 +19,11 @@ router.post('/', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
     try {
+      const targetComment = await Comment.findByPk(req.params.id);
+      if(targetComment.user_id == req.session.user_id){
       const commentData = await Comment.destroy({
         where: {
           id: req.params.id,
-          user_id: req.session.user_id,
         },
       });
   
@@ -32,7 +33,10 @@ router.delete('/:id', withAuth, async (req, res) => {
       }
   
       res.status(200).json(commentData);
-    } catch (err) {
+    }
+  }
+     catch (err) {
+      console.log(err)
       res.status(500).json(err);
     }
   });
