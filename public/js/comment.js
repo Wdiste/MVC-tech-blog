@@ -155,8 +155,8 @@ document
     .querySelector('.post-update')
     .addEventListener('click', updatePostHandler);
 
-    // if the delete button exists (user owns the comment), look for button to show update comment form
-if(document.querySelector('.comment-delete')){
+    // if the render button exists (user owns the comment), look for button to show update comment form
+if(document.querySelector('.comment-render')){
 document
     .querySelector('.comment-render')
     .addEventListener('click', commentUpdateRender);
