@@ -8,6 +8,7 @@ const postNewRender = async (event) => {
       .classList.remove("invisible");
   };
 
+    // adds a new post from new post form data
 const newPostHandler = async (event) => {
   event.preventDefault();
 
@@ -31,34 +32,35 @@ const newPostHandler = async (event) => {
   }
 };
 
-const updatePostHandler = async (event) => {
-  event.preventDefault();
+// updates a post based on update post form
+// const updatePostHandler = async (event) => {
+//   event.preventDefault();
 
-  const title = document.querySelector('#post-name').value.trim();
-  const content = document.querySelector('#post-content').value.trim();
+//   const title = document.querySelector('#post-name').value.trim();
+//   const content = document.querySelector('#post-content').value.trim();
 
-if (event.target.hasAttribute('data-id')) {
-  const id = event.target.getAttribute('data-id');
+// if (event.target.hasAttribute('data-id')) {
+//   const id = event.target.getAttribute('data-id');
 
-try{
-  if (title && content) {
-    const response = await fetch(`/api/posts/${id}`, {
-      method: 'PUT',
-      body: JSON.stringify({ title, content, id }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+// try{
+//   if (title && content) {
+//     const response = await fetch(`/api/posts/${id}`, {
+//       method: 'PUT',
+//       body: JSON.stringify({ title, content, id }),
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     });
 
-    if (response.ok) {
-      document.location.replace('/dashboard');
-    } else {
+//     if (response.ok) {
+//       document.location.replace('/dashboard');
+//     } else {
       
-      alert('Failed to update post');
-    }}
-  }
-  catch (err) {console.log(err)};
-};};
+//       alert('Failed to update post');
+//     }}
+//   }
+//   catch (err) {console.log(err)};
+// };};
 
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute('data-id')) {
