@@ -41,6 +41,8 @@ document
   .querySelector('.new-post-form')
   .addEventListener('submit', newPostHandler);
 
-document
-  .querySelector('.post-list')
-  .addEventListener('click', delButtonHandler);
+if(document.querySelector('.comment-delete')){
+  document
+   .querySelector('.post-list')
+   .addEventListener('click', delButtonHandler);
+}
