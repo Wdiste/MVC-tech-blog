@@ -8,18 +8,11 @@
     <p>
       {{content}}
     </p>
-    <ul>
+    <ul class="comment-list">
       {{#each this.comments as |c|}}
         <li>{{c.content}}</li>
         <p>Created by {{commenter.name}} on {{format_date c.date_created}}</p>
-        {{#if current_user}}
-        <span>
-          <div class="col-md-4">
-            <button class="btn btn-sm btn-danger" data-id="{{c.id}}">Delete
-              Comment</button>
-          </div>
-        </span>
-        {{/if}}
+        <button class="btn btn-sm btn-danger visible" data-id="{{c.id}}">Delete Comment</button>
       {{/each}}
     </ul>
     <form class="form new-comment-form">

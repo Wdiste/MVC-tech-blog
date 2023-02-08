@@ -28,7 +28,6 @@ const newCommentHandler = async (event) => {
 const delButtonHandler = async (event) => {
     if (event.target.hasAttribute('data-id')) {
       const id = event.target.getAttribute('data-id');
-  
       const response = await fetch(`/api/comment/${id}`, {
         method: 'DELETE',
       });
@@ -38,10 +37,10 @@ const delButtonHandler = async (event) => {
       } else {
         alert('Failed to delete comment');
       }
-    }
+    };
   };
   
-  document
+document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newCommentHandler);
   
