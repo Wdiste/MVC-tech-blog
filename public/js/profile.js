@@ -1,3 +1,13 @@
+// button to reveal the form for a new post
+const postNewRender = async (event) => {
+    document
+      .querySelector('.new-post-render')
+      .classList.toggle("invisible");
+    document
+      .querySelector('.new-post-form')
+      .classList.remove("invisible");
+  };
+
 const newPostHandler = async (event) => {
   event.preventDefault();
 
@@ -65,11 +75,14 @@ const delButtonHandler = async (event) => {
     }
   }};
 
+    // show new post form
+document
+  .querySelector('.new-post-render')
+  .addEventListener('click', postNewRender);
+
 document
   .querySelector('.new-post-form')
   .addEventListener('submit', newPostHandler);
-
-
 
 if(document.querySelector('.post-delete')){
   document

@@ -1,5 +1,6 @@
 const post_id = document.querySelector('#post-id').innerHTML;
 
+// button to reveal the form for a new comment
 const commentNewRender = async (event) => {
     document
       .querySelector('.new-comment-render')
@@ -9,6 +10,7 @@ const commentNewRender = async (event) => {
       .classList.remove("invisible");
   };
 
+  // adds a new comment from new comment form data
 const newCommentHandler = async (event) => {
     event.preventDefault();
   
@@ -34,6 +36,7 @@ const newCommentHandler = async (event) => {
     }
   };
 
+  // button to reveal the form for updating a post
 const postUpdateRender = async (event) => {
     document
       .querySelector('.post-render')
@@ -43,6 +46,7 @@ const postUpdateRender = async (event) => {
       .classList.remove("invisible");
   };
 
+  // updates a post based on update post form
 const updatePostHandler = async (event) => {
     event.preventDefault();
 
@@ -72,6 +76,7 @@ const updatePostHandler = async (event) => {
     catch (err) {console.log(err)};
   };};
   
+  // deletes a comment specified by the button's parent
 const delButtonHandler = async (event) => {
 
     if (event.target.hasAttribute('data-id')) {
@@ -89,6 +94,7 @@ const delButtonHandler = async (event) => {
     };
   };
   
+  // button to reveal the form for updating a comment
 const commentUpdateRender = async (event) => {
     document
       .querySelector('.comment-render')
@@ -98,6 +104,7 @@ const commentUpdateRender = async (event) => {
       .classList.remove("invisible");
   };
 
+  // updates a comment based on update comment form
 const updateCommentHandler = async (event) => {
     event.preventDefault();
 
@@ -126,33 +133,43 @@ const updateCommentHandler = async (event) => {
     catch (err) {console.log(err)};
   };};
 
+  // ==========  set up event listeners =========================
+
+  // show new comment form
 document
   .querySelector('.new-comment-render')
   .addEventListener('click', commentNewRender);
 
+  // submit new comment
 document
     .querySelector('.new-comment-form')
     .addEventListener('submit', newCommentHandler);
 
+    // show update post form
 document
     .querySelector('.post-render')
     .addEventListener('click', postUpdateRender);
   
+    // update this post
 document
     .querySelector('.post-update')
     .addEventListener('click', updatePostHandler);
 
+    // if the delete button exists (user owns the comment), look for button to show update comment form
 if(document.querySelector('.comment-delete')){
 document
     .querySelector('.comment-render')
     .addEventListener('click', commentUpdateRender);
 }
 
+    // if the update button exists (user owns the comment), look for button to  update comment
 if(document.querySelector('.comment-update')){
 document
     .querySelector('.comment-update')
     .addEventListener('click', updateCommentHandler);
 }
+
+    // if the delete button exists (user owns the comment), look for button to delete comment
 
 if(document.querySelector('.comment-delete')){
   document
