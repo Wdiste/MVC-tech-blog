@@ -3,7 +3,7 @@
     <h2>{{title}}</h2>
     <p>Created by {{user.name}} on {{format_date date_created}}</p>
     <p>post no. <span id="post-id">{{id}}</span></p>
-    {{#if c.delete_access}}
+    {{#if post_access}}
     <button class="btn btn-sm btn-warning post-render" >Edit</button>
     {{/if}}
     <form class="form post-update-form invisible">
@@ -21,7 +21,8 @@
     </form>
   </div>
   <div class="col-md-7">
-    <p>
+    <h5>{{user.name}} says:</h5>
+    <p class="border border-dark p-5">
       {{content}}
     </p>
     <ul class="comment-list">
@@ -31,7 +32,7 @@
             <h5 class="card-title">{{commenter.name}} says:</h5>
             <p class="card-text">{{c.content}}</p>
             <h6 class="card-subtitle mb-2 text-muted">{{format_date date_created}}</h6>
-            {{#if c.delete_access}}
+            {{#if c.comment_access}}
             <button class="btn btn-sm btn-danger comment-delete" data-curr-user="{{this.current_user}}" data-creator="{{comment.user_id}}" data-id="{{c.id}}">Delete Comment</button>
             <button class="btn btn-sm btn-warning comment-render">Update Comment</button>
                 <form class="form comment-update-form d-none">

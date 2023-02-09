@@ -59,8 +59,8 @@ router.get('/post/:id', withAuth, async (req, res) => {
     });
 
     const posts = postData.get({ plain: true });
-    posts.comments = posts.comments.map(comment => ({...comment, delete_access: comment.user_id == req.session.user_id}));
-
+    posts.post_access = posts.user_id == req.session.user_id;
+    posts.comments = posts.comments.map(comment => ({...comment, comment_access: comment.user_id == req.session.user_id}));
     res.render('post', {
       ...posts,
       logged_in: req.session.logged_in,
