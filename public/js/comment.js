@@ -40,10 +40,10 @@ const newCommentHandler = async (event) => {
 const postUpdateRender = async (event) => {
     document
       .querySelector('.post-render')
-      .classList.toggle("invisible");
+      .classList.toggle("d-none");
     document
       .querySelector('.post-update-form')
-      .classList.remove("invisible");
+      .classList.remove("d-none");
   };
 
   // updates a post based on update post form

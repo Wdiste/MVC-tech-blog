@@ -17,3 +17,6 @@ header, .post:not(:last-child) {
   text-decoration: underline;
 }
 
+a {
+  color: white;
+}
